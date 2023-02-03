@@ -1,0 +1,4 @@
+"$$$/VividFlux/PluginName=清流"
+"$$$/VividFlux/Copy/CopyRaw=复制RAW"
+"$$$/VividFlux/Copy/CopyRAWWithXMP=复制RAW和xmp"
+"$$$/VividFlux/Copy/CopyJPG=复制JPG"
