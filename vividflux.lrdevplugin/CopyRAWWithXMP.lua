@@ -49,12 +49,16 @@ local function CopyRAWWithXMP(lrFunctionContext)
             functionContext = lrFunctionContext,
         }
     )
-    progressScope:setPausable(false, false)
+    progressScope:setPausable(false, true) -- pausable, cancelable
     local progressCount = 0
 
     -- copy
     local copyFlag = false
     for key, lrPhoto in pairs(lrPhotos) do
+
+        if progressScope:isCanceled() then
+            return copyFlag
+        end
 
         if CopyUtilities.copyRAW(lrPhoto, destDirectory) then
             if CopyUtilities.copyXMP(lrPhoto, destDirectory) then
