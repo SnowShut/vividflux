@@ -19,6 +19,7 @@ Implementation of ONE-CLICK COPY for Lightroom Classic.
 
 local LrFunctionContext = import "LrFunctionContext"
 local LrProgressScope = import "LrProgressScope"
+local LrTasks = import "LrTasks"
 
 local CopyUtilities = require "CopyUtilities"
 
@@ -49,12 +50,16 @@ local function CopyRAWWithXMP(lrFunctionContext)
             functionContext = lrFunctionContext,
         }
     )
-    progressScope:setPausable(false, true) -- pausable, cancelable
+    progressScope:setPausable(true, true) -- pausable, cancelable
     local progressCount = 0
 
     -- copy
     local copyFlag = false
     for key, lrPhoto in pairs(lrPhotos) do
+
+        while (progressScope:isPaused() and (not progressScope:isCanceled())) do
+            LrTasks.sleep(1/4)
+        end
 
         if progressScope:isCanceled() then
             return copyFlag
