@@ -20,7 +20,8 @@ Features:
 TODO:
 1. upper or lower case
 2. change version limit
-
+3. tell success / failure after complete (CONTROLED IN PLUG-IN MENU)
+4. Simplify and integrate the code of Copy*.lua
 ------------------------------------------------------------------------------]]
 
 return {

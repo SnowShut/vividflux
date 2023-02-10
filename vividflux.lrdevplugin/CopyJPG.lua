@@ -20,6 +20,7 @@ Implementation of ONE-CLICK COPY for Lightroom Classic.
 local LrFunctionContext = import "LrFunctionContext"
 local LrProgressScope = import "LrProgressScope"
 local LrTasks = import "LrTasks"
+local LrPathUtils = import "LrPathUtils"
 
 local CopyUtilities = require "CopyUtilities"
 
@@ -71,6 +72,11 @@ local function CopyRAW(lrFunctionContext)
 
         progressCount = progressCount + 1
         progressScope:setPortionComplete(progressCount, photoCount)
+        progressScope:setCaption(
+            LrPathUtils.removeExtension(
+                lrPhoto:getFormattedMetadata("fileName")
+            ).." - "..tostring(progressCount).."/"..tostring(photoCount)
+        )
     end
 
     progressScope:done()
